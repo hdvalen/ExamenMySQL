@@ -1,18 +1,18 @@
 CREATE DATABASE bibliotecaCampus;
 
-CREATE TABLE autores(
+CREATE TABLE IF NOT EXISTS autores(
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50),
     fechaNacimiento DATE
 );
 
-CREATE TABLE libroAutor(
+CREATE TABLE IF NOT EXISTS libroAutor(
     id INT PRIMARY KEY AUTO_INCREMENT,
     idAutores INT ,
     CONSTRAINT id_autores_FK FOREIGN KEY (idAutores) REFERENCES autores(id)
 );
 
-CREATE TABLE miembro(
+CREATE TABLE IF NOT EXISTS miembro(
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50),
     cedula NUMERIC UNIQUE,
@@ -20,43 +20,43 @@ CREATE TABLE miembro(
     direccion VARCHAR(50)
 );
 
-CREATE TABLE transaccion(
+CREATE TABLE IF NOT EXISTS  transaccion(
     id INT PRIMARY KEY AUTO_INCREMENT,
     idMiembro INT,
     CONSTRAINT id_miembro_FK FOREIGN KEY (idMiembro) REFERENCES miembro(id)
 );
 
-CREATE TABLE detalleTransaccion(
+CREATE TABLE IF NOT EXISTS  detalleTransaccion(
     id INT PRIMARY KEY AUTO_INCREMENT,
     fechaHora DATETIME,
     idTransaccion INT,
     CONSTRAINT id_transaccion_FK FOREIGN KEY (idTransaccion) REFERENCES transaccion(id)
 );
 
-CREATE TABLE generos (
+CREATE TABLE IF NOT EXISTS generos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50)
 );
 
-CREATE TABLE detalleGenero (
+CREATE TABLE IF NOT EXISTS  detalleGenero (
     id INT PRIMARY KEY AUTO_INCREMENT,
     idGenero INT,
     CONSTRAINT id_genero_FK FOREIGN KEY (idGenero) REFERENCES generos(id)
 );
 
-CREATE TABLE publicacion(
+CREATE TABLE IF NOT EXISTS  publicacion(
     id INT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE,
     sitio VARCHAR(50)
 );
-CREATE TABLE editor(
+CREATE TABLE IF NOT EXISTS  editor(
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50),
     idPublicacion INT,
     CONSTRAINT id_publicacion_FK FOREIGN KEY (idPublicacion) REFERENCES publicacion(id)
 );
 
-CREATE TABLE detalleEditor(
+CREATE TABLE IF NOT EXISTS detalleEditor(
     id INT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE,
     idEditor INT,
